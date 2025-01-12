@@ -19,12 +19,11 @@
         </div>
         <div class="layout__body">
           <form class="form" action="#" method="POST">
-            {% csrf_token%}
+            {% csrf_token %}
 
             <div class="form__group">
               <label for="room_topic">Topic</label>
-
-              <input required type="text" name="topic" list="topic-list" />
+              <input required type="text" value="{{room.topic.name}}" name="topic" list="topic-list" />
               <!-- id must match input list name -->
               <datalist id="topic-list">
                 <select id="room-topic">
@@ -37,29 +36,17 @@
 
               <div class="form__group">
                 <label for="room_name">Name</label>
-                <input required type="text" name="name"/>
+                <input required type="text" value="{{room.name}}" name="name"/>
               </div>
 
               <div class="form__group">
                 <label for="room_description"> Description</label>
-                <input required type="text" name="description"/>
+                <input required type="text" value="{{room.description}}"  name="description"/>
               </div>
-
-            <!-- <div class="form__group">
-              <label for="room_topic">Topic</label>
-              <input required type="text" name="topic" id="room_topic" list="topic-list" />
-              <datalist id="topic-list">
-                <select id="room_topic">
-                  <option value="">Select your topic</option>
-                  <option value="Python">Python</option>
-                  <option value="Django">Django</option>
-                </select>
-              </datalist>
-            </div> -->
 
             <div class="form__action">
               <a class="btn btn--dark" href="{% url 'home' %}">Cancel</a>
-              <button class="btn btn--main" type="submit">Create Room</button>
+              <button class="btn btn--main" type="submit">Submit</button>
             </div>
 
           </form>

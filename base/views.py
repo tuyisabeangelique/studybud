@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm 
 from .models import Room, Topic, Message
-from .forms import RoomForm
+from .forms import RoomForm, UserForm
 
 # Create your views here.
 
@@ -74,7 +74,7 @@ def home(request):
     Q(name__icontains=q) |
     Q(description__icontains=q) 
     )
-  topics = Topic.objects.all()
+  topics = Topic.objects.all()[0:5]
   room_count = rooms.count()
   
   # to be used for recent activity
@@ -101,6 +101,7 @@ def room(request, pk):
     # Stay on the page
     return redirect('room', pk=room.id)
   
+  print("request user: ", request.user)
   context = {'room' : room, "room_messages":room_messages, 'participants':participants}
   return render(request, "base/room.html", context)
 
@@ -146,16 +147,19 @@ def update_room(request, pk):
     return HttpResponse("Only the room's host can update this room.")
   
   if request.method == 'POST':
-  
     # We will replace the relevant room with the updated form data
-    form = RoomForm(request.POST, instance=room)
-    if form.is_valid():
-      form.save()
-      return redirect('home')
+    topic_name = request.POST.get('topic')
+    topic, created = Topic.objects.get_or_create(name=topic_name)
+    room.name = request.POST.get('name')
+    room.topic = topic
+    room.description = request.POST.get('description')
+    room.save()
+    return redirect('home')
   
   context = {
     'form': form, 
-    "topics":topics
+    "topics":topics,
+    "room": room 
   }
   return render(request, 'base/room_form.html', context)
   
@@ -180,3 +184,27 @@ def delete_message(request, pk):
     message.delete()
     return redirect('home')
   return render(request, "base/delete.html", {'obj': message})
+
+@login_required(login_url='login')
+def update_user(request):
+  user = request.user
+  form = UserForm(instance=user)
+  
+  # When we submit the update user form
+  if request.method == 'POST':
+    form = UserForm(request.POST, instance=user)
+    if form.is_valid():
+      form.save()
+      return redirect('user-profile', pk=user.id)
+    
+  context = {'form':form}
+  return render(request, 'base/update_user.html', context)
+
+def topics_page(request):
+  q = request.GET.get('q') if request.GET.get('q') != None else ''
+  topics = Topic.objects.filter(name__icontains=q)
+  return render(request, 'base/topics.html', {"topics": topics})
+
+def activity_page(request):
+  room_messages = Message.objects.all()
+  return render(request, 'base/activity.html', {'room_messages': room_messages})
