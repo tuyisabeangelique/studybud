@@ -4,7 +4,7 @@
   <div class="container">
     <a href="{% url 'home' %}" class="header__logo">
       <img src="{% static 'images/assets/logo.svg' %}" />
-      <h1>StudyBuddy</h1>
+      <h1>StudyHive</h1>
     </a>
     <form class="header__search" method="GET" action="{% url 'home'%}">
       <label>
@@ -25,7 +25,7 @@
       <div class="header__user">
         <a href="{% url 'update-user' %}">
           <div class="avatar avatar--medium active">
-            <img src="https://randomuser.me/api/portraits/men/37.jpg" />
+            <img src="{{request.user.avatar.url}}" />
           </div>
           <p>{{request.user.username}}<span>@{{request.user.username}}</span></p>
         </a>
@@ -40,7 +40,7 @@
 
          <!-- Not Logged In -->
       <a href="{% url 'login' %}">
-        <img src="{% static 'images/assets/avatar.svg' %}" />
+        <img class="login-avatar-img" src="{% static 'images/avatar.png' %}" />
         <p>Login</p>
       </a>
       {%endif%}

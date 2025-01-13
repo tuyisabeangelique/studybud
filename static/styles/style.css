@@ -1,17 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
 
 :root {
-  --color-main: #71c6dd;
-  --color-main-light: #e1f6fb;
-  --color-dark: #3f4156;
-  --color-dark-medium: #51546e;
-  --color-dark-light: #696d97;
-  --color-light: #e5e5e5;
-  --color-gray: #8b8b8b;
-  --color-light-gray: #b2bdbd;
-  --color-bg: #2d2d39;
-  --color-success: #5dd693;
-  --color-error: #fc4b0b;
+  --color-main: #FF686B;           
+  --color-main-light: #FFD7D9;     
+  --color-dark: #2B2D42;           
+  --color-dark-medium: #3C3F58;    
+  --color-dark-light: #5A5D77;     
+  --color-light: #F7F7F9;          
+  --color-gray: #A8A8B3;          
+  --color-light-gray: #D1D1E1;     
+  --color-bg: #F9F9FB; 
+  --color-accent: #FFB86C;
+  --color-success: #4CAF50;      
+  --color-error: #FF4433; 
 }
 
 /*========== base styles ==========*/
@@ -287,6 +288,8 @@ a {
   width: 3.2rem;
 }
 
+
+
 .header__logo > h1 {
   font-weight: 700;
   font-size: 2rem;
@@ -355,6 +358,7 @@ a {
 
 .header__menu img {
   height: 3.6rem;
+  width: auto;
 }
 
 .header__menu p {
@@ -575,7 +579,7 @@ a {
   justify-content: space-between;
   margin-bottom: 3rem;
   font-weight: 500;
-  color: var(--color-light-gray);
+  color: var(--color-dark-light);
   transition: all 0.3s ease-in-out;
 }
 
@@ -586,7 +590,7 @@ a {
 
 .topics__list li a span {
   padding: 0.5rem 1rem;
-  background-color: var(--color-dark);
+  background-color: var(--color-light-gray);
   border-radius: 3px;
   font-size: 1.3rem;
   font-weight: 700;
@@ -782,6 +786,7 @@ a {
   border-radius: 5px;
   margin-top: 1rem;
   margin-left: -4.2rem;
+  color: var(--color-dark-light);
 }
 
 .roomListRoom__actions svg {
@@ -884,6 +889,10 @@ a {
   text-transform: uppercase;
   color: var(--color-dark-light);
   margin-bottom: 0.5rem;
+}
+
+.profile__about p {
+  color: var(--color-gray);
 }
 
 .profile-page .roomList__header {
@@ -1092,9 +1101,14 @@ a {
   gap: 1rem;
 }
 
+.thread__date {
+  color: var(--color-gray);
+}
+
 .thread__details {
   font-size: 1.4rem;
   margin-top: 0.5rem;
+  color: var(--color-dark-light);
 }
 
 .room__message {
@@ -1163,3 +1177,34 @@ a {
   color: var(--color-main);
   font-weight: 1.4rem;
 }
+
+.errmessages__container {
+  max-width: 300px; 
+  margin: 1.5rem auto; 
+  padding: 1.5rem;
+  border: 1px solid var(--color-error); 
+  border-radius: 8px; 
+  background-color: var(--color-main-light); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.messages {
+  margin: 0;
+  padding: 0;
+  list-style: none; 
+}
+
+/* Style individual message items */
+.messages li {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-dark); /* Text color */
+  padding: 0.5rem 0; 
+  border-bottom: 1px solid var(--color-light-gray); 
+}
+
+.messages li:last-child {
+  border-bottom: none;
+}
+
