@@ -18,7 +18,7 @@ This is a basic Django-based web application that allows users to perform CRUD (
 
 Clone the repository and move into the directory of project files:
 
-`git clone <repository_url>`
+`git clone https://github.com/tuyisabeangelique/StudyHive.git`
 `cd StudyHive`
 
 Create a virtual environment:
